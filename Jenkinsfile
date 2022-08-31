@@ -13,6 +13,12 @@ pipeline {
             steps {
                 sh 'mvn install'
             }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                    }
+                }
         }
 
         stage('UNIT TEST'){
