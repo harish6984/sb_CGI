@@ -32,7 +32,26 @@ pipeline {
                 sh 'mvn checkstyle:checkstyle'
 
 			}
-		}	
+		}
+		stage('CODE ANALYSIS with SONARQUBE') {
+             environment {
+                scannerHome = tool 'SonarCloud'
+             }
+             steps {
+                withSonarQubeEnv('sonar') {
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=harish6984_sb_CGI \
+                    -Dsonar.projectName=sb_CGI \
+                    -Dsonar.projectVersion=1.0 \
+                    -Dsonar.sources=src/ \
+                    -Dsonar.java.binaries=target/test-classes/com/example/helloworld/controller/ \
+                    -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                    -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                }
+
+
+             }
+        }
+
     }
-	
 }
