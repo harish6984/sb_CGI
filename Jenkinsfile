@@ -40,6 +40,8 @@ pipeline {
              steps {
                 withSonarQubeEnv('SonarCloud') {
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=harish6984_sb_CGI \
+                    -Dsonar.login="admin"
+                    -Dsonar.password="admin"
                     -Dsonar.projectName=sb_CGI \
                     -Dsonar.projectVersion=1.0 \
                     -Dsonar.sources=src/ \
