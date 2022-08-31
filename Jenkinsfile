@@ -35,10 +35,10 @@ pipeline {
 		}
 		stage('CODE ANALYSIS with SONARQUBE') {
              environment {
-                scannerHome = tool 'SonarCloud'
+                scannerHome = tool 'sonar4.7'
              }
              steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('SonarCloud') {
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=harish6984_sb_CGI \
                     -Dsonar.projectName=sb_CGI \
                     -Dsonar.projectVersion=1.0 \
